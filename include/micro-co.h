@@ -19,6 +19,7 @@ typedef struct co_state *co_state_t;
 #if defined(MICRO_CO_FORCE_USE_LABEL_AS_VALUE) || !defined(MICRO_CO_USE_SWITCH) && (defined(__GNUC__) || defined(__clang__))
 #   define CO_SET_LABEL(STATE, LABEL) do { *STATE = (co_state_t)&&LABEL; } while (0)
 #   define CO_JUMP_TO(STATE) do { goto **(void **)STATE; } while (0)
+#   undef MICRO_CO_USE_SWITCH
 
 #elif !defined(MICRO_CO_USE_SWITCH) && (defined(__MSVC__) && (defined(__i386__) || defined(__x86_64__)))
 #   warn    NOT TESTED
