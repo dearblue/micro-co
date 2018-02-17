@@ -72,7 +72,6 @@ static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned 
         do {                                                \
             *_co_entity_ = CO_LABEL_;                       \
         case CO_LABEL_:;                                    \
-            break;                                          \
         } while (0);                                        \
         }                                                   \
     } while (0)                                             \
