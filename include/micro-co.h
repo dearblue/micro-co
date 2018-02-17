@@ -50,21 +50,29 @@ static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned 
         }                                                   \
                                                             \
         switch (*_co_entity_) {                             \
-        case CO_LABEL__:                                    \
+        do {                                                \
+        case CO_LABEL__:;                                   \
+        } while (0)                                         \
 
 #define co_yield(RET)                                       \
+        do {                                                \
             *_co_entity_ = CO_LABEL__;                      \
             return RET;                                     \
-        case CO_LABEL__:                                    \
+        case CO_LABEL__:;                                   \
+        } while (0)                                         \
 
 #define co_checkpoint()                                     \
+        do {                                                \
             *_co_entity_ = CO_LABEL__;                      \
-        case CO_LABEL__:                                    \
+        case CO_LABEL__:;                                   \
+        } while (0)                                         \
 
 #define co_end()                                            \
+        do {                                                \
             *_co_entity_ = CO_LABEL__;                      \
-        case CO_LABEL__:                                    \
+        case CO_LABEL__:;                                   \
             break;                                          \
+        } while (0);                                        \
         }                                                   \
     } while (0)                                             \
 
