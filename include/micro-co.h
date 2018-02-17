@@ -8,8 +8,8 @@
  *     dearblue <dearblue@users.noreply.github.com>
  */
 
-#ifndef MICRO_CO_H__
-#define MICRO_CO_H__ 1
+#ifndef MICRO_CO_H_
+#define MICRO_CO_H_ 1
 
 typedef struct co_state *co_state_t;
 
@@ -38,7 +38,7 @@ typedef struct co_state *co_state_t;
 
 /* switch 文による実装 */
 
-#define CO_LABEL__ __LINE__
+#define CO_LABEL_ __LINE__
 
 static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned int *)co; }
 
@@ -47,31 +47,31 @@ static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned 
         unsigned int *_co_entity_ = _co_cast_context(S);    \
                                                             \
         if (*_co_entity_ == 0) {                            \
-            *_co_entity_ = CO_LABEL__;                      \
+            *_co_entity_ = CO_LABEL_;                       \
         }                                                   \
                                                             \
         switch (*_co_entity_) {                             \
         do {                                                \
-        case CO_LABEL__:;                                   \
+        case CO_LABEL_:;                                    \
         } while (0)                                         \
 
 #define co_yield(RET)                                       \
         do {                                                \
-            *_co_entity_ = CO_LABEL__;                      \
+            *_co_entity_ = CO_LABEL_;                       \
             return RET;                                     \
-        case CO_LABEL__:;                                   \
+        case CO_LABEL_:;                                    \
         } while (0)                                         \
 
 #define co_checkpoint()                                     \
         do {                                                \
-            *_co_entity_ = CO_LABEL__;                      \
-        case CO_LABEL__:;                                   \
+            *_co_entity_ = CO_LABEL_;                       \
+        case CO_LABEL_:;                                    \
         } while (0)                                         \
 
 #define co_end()                                            \
         do {                                                \
-            *_co_entity_ = CO_LABEL__;                      \
-        case CO_LABEL__:;                                   \
+            *_co_entity_ = CO_LABEL_;                       \
+        case CO_LABEL_:;                                    \
             break;                                          \
         } while (0);                                        \
         }                                                   \
@@ -83,7 +83,7 @@ static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned 
 
 #define CO_LABEL_2_(X) co_label_ ## X ## _
 #define CO_LABEL_1_(X) CO_LABEL_2_(X)
-#define CO_LABEL__ CO_LABEL_1_(__LINE__)
+#define CO_LABEL_ CO_LABEL_1_(__LINE__)
 
 static inline void **_co_cast_context(co_state_t *co) { return (void **)co; }
 
@@ -99,24 +99,24 @@ static inline void **_co_cast_context(co_state_t *co) { return (void **)co; }
 
 #define co_yield(RET)                                       \
         do {                                                \
-            CO_SET_LABEL(_co_entity_, CO_LABEL__);          \
+            CO_SET_LABEL(_co_entity_, CO_LABEL_);           \
             return RET;                                     \
-            CO_LABEL__:;                                    \
+            CO_LABEL_:;                                     \
         } while (0)                                         \
 
 #define co_checkpoint()                                     \
         do {                                                \
-            CO_SET_LABEL(_co_entity_, CO_LABEL__);          \
-            CO_LABEL__:;                                    \
+            CO_SET_LABEL(_co_entity_, CO_LABEL_);           \
+            CO_LABEL_:;                                     \
         } while (0)                                         \
 
 #define co_end()                                            \
         do {                                                \
-            CO_SET_LABEL(_co_entity_, CO_LABEL__);          \
-            CO_LABEL__:;                                    \
+            CO_SET_LABEL(_co_entity_, CO_LABEL_);           \
+            CO_LABEL_:;                                     \
         } while (0);                                        \
     } while (0)                                             \
 
 #endif /* MICRO_CO_USE_SWITCH */
 
-#endif /* MICRO_CO_H__ */
+#endif /* MICRO_CO_H_ */
