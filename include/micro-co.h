@@ -57,6 +57,10 @@ static inline unsigned int *_co_cast_context(co_state_t *co) { return (unsigned 
             return RET;                                     \
         case CO_LABEL__:                                    \
 
+#define co_checkpoint()                                     \
+            *_co_entity_ = CO_LABEL__;                      \
+        case CO_LABEL__:                                    \
+
 #define co_end()                                            \
             *_co_entity_ = CO_LABEL__;                      \
         case CO_LABEL__:                                    \
@@ -88,6 +92,12 @@ static inline void **_co_cast_context(co_state_t *co) { return (void **)co; }
         do {                                                \
             CO_SET_LABEL(_co_entity_, CO_LABEL__);          \
             return RET;                                     \
+            CO_LABEL__:;                                    \
+        } while (0)                                         \
+
+#define co_checkpoint()                                     \
+        do {                                                \
+            CO_SET_LABEL(_co_entity_, CO_LABEL__);          \
             CO_LABEL__:;                                    \
         } while (0)                                         \
 
