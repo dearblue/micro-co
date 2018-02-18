@@ -118,4 +118,6 @@ static inline void **_co_cast_context(co_state_t *co) { return (void **)co; }
 
 #endif /* MICRO_CO_USE_SWITCH */
 
+#define co_halt(RET)    do { for (;;) { co_yield(RET); } } while (0)
+
 #endif /* MICRO_CO_H_ */
