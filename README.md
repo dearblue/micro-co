@@ -4,12 +4,6 @@
 
 gcc (あるいは互換コンパイラ) の "label as value" が利用できるならば切り替えることが可能です。
 
-  * Product name: [micro-co](https://github.com/dearblue/micro-co)
-  * Product quality: PROTOTYPE
-  * Author: [dearblue](https://github.com/dearblue)
-  * Project page: <https://github.com/dearblue/micro-co>
-  * Licensing: [Creative Commons Zero License (CC0 / Public Domain)](LICENSE)
-
 
 ## 特徴
 
@@ -83,6 +77,27 @@ gcc (あるいは互換コンパイラ) の "label as value" が利用できる�
         ```
 
 
+## 簡易リファレンス
+
+  * ``co_state_t context = CO_INIT;``<br>
+    疑似コルーチンのコンテキストを宣言し初期化する。
+  * ``void co_begin(co_state_t *co)``<br>
+    疑似コルーチンの開始を宣言する。
+  * ``void co_yield(RET)``<br>
+    処理を疑似コルーチンから呼び出し元に戻す。その時の戻り値は RET となる。
+    再び関数が呼ばれた場合、この直後からの再開となる。
+  * ``void co_checkpoint(void)``<br>
+    処理の再開位置を保存する。
+    ``co_yield`` や ``co_halt`` 以外で関数を抜けた場合でも、この直後からの再開となる。
+  * ``void co_end(void)``<br>
+    疑似コルーチンの終了を宣言する。
+    処理はそのまま続行される。
+    次回以降は、関数が呼ばれてもこの直後からの再開となる。
+  * ``void co_halt(RET)``<br>
+    ``co_end`` に似ているが、処理を打ち切り常に RET を返すようになる。
+    何度関数が呼ばれても RET を返すだけとなる。
+
+
 ## 調整
 
   * 定義名 ``MICRO_CO_USE_SWITCH``
@@ -100,3 +115,12 @@ gcc (あるいは互換コンパイラ) の "label as value" が利用できる�
     gcc (あるいは互換コンパイラ) の "label as value" の利用を強制します。
 
     ``MICRO_CO_USE_SWITCH`` を打ち消すため、可能な限り利用しないで下さい。
+
+
+## Specification
+
+  * Product name: micro-co
+  * Product quality: PROTOTYPE
+  * Author: [dearblue](https://github.com/dearblue)
+  * Project page: <https://github.com/dearblue/micro-co>
+  * Licensing: [Creative Commons Zero License (CC0 / Public Domain)](LICENSE)
